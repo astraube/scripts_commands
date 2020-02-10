@@ -1,2 +1,11 @@
 # scripts
-Scripts e comandos uteis
+Useful scripts and commands
+
+# Linux
+- to commit
+
+# Android
+- to commit
+
+# Kubernetes
+- to commit
