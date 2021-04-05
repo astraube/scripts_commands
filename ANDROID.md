@@ -1,16 +1,6 @@
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
 
-#### Links
-
-https://developer.android.com/studio/command-line
-
-http://adbshell.com/commands/adb-shell-netstat
-
-https://gist.github.com/otikev/95d0e163704367048b1d0efcefcc7151
-
-https://www.androidjungles.com/adb-fastboot-commands
-
 
 
 * Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
@@ -260,3 +250,16 @@ adb install -r -d -l com.google.android.gms-1-update-play-service-30.10.2018.apk
 
 ###### Verifique a versão do aplicativo (comandos grep funcionam apenas no linux)
 `adb shell dumpsys package <PACKAGE> | grep versionName`
+
+
+
+
+#### Links
+
+https://developer.android.com/studio/command-line
+
+http://adbshell.com/commands/adb-shell-netstat
+
+https://gist.github.com/otikev/95d0e163704367048b1d0efcefcc7151
+
+https://www.androidjungles.com/adb-fastboot-commands
