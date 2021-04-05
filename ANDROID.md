@@ -86,47 +86,66 @@ adb shell am start -c android.intent.category.HOME -a android.intent.action.MAIN
 -----------------------------------------------
 
 ##### Habilitar/Desabilitar wifi
-`adb shell svc wifi disable [enable]`
+```bash
+adb shell svc wifi disable [enable]
+```
 
 ##### Get device Android Id
-`adb shell settings get secure android_id`
+```bash
+adb shell settings get secure android_id
+```
 
 ##### enviar comando por content provider
-`adb shell content call --uri content://[package app].Commands --method sendGeoTest`
+```bash
+adb shell content call --uri content://[package app].Commands --method sendGeoTest
+```
 
 
 ## Alterar Configuracoes Globais
  * Para descobrir novas configurações basta abrir o ADB DEBUG e procurar eventos do tipo `call_put(...)`
 
 ###### ativar GPS (alta precisão)
-`adb shell settings put secure location_providers_allowed gps,network`
-`adb shell settings put secure location_providers_allowed '+gps,network'`
-`adb shell settings put secure location_providers_allowed -gps,network`
+```bash
+adb shell settings put secure location_providers_allowed gps,network
+adb shell settings put secure location_providers_allowed '+gps,network'
+adb shell settings put secure location_providers_allowed -gps,network
+```
 
 ###### tempo de desligamento da tela
-`adb shell settings put system screen_off_timeout -1`
+```bash
+adb shell settings put system screen_off_timeout -1
+```
 
 ###### instalacao de aplicativos de fontes desconhecidas (0 off | 1 on)
-`adb shell settings put global install_non_market_apps 0`
-`adb shell settings put global install_non_market_apps 1`
-
+```bash
+adb shell settings put global install_non_market_apps 0
+adb shell settings put global install_non_market_apps 1
+```
 
 ###### instalacao de aplicativos de fontes desconhecidas (Android mais recente)
-`adb shell settings put secure install_non_market_apps 1`
+```bash
+adb shell settings put secure install_non_market_apps 1
+```
 
 ###### Seguranca - Nenhum Bloqueio de Tela
-`adb shell settings put global voice_unlock_screen null`
-`adb shell settings put global voice_unlock_and_launch1 null`
-`adb shell settings put global voice_unlock_and_launch2 null`
-`adb shell settings put global voice_unlock_and_launch3 null`
+```bash
+adb shell settings put global voice_unlock_screen null
+adb shell settings put global voice_unlock_and_launch1 null
+adb shell settings put global voice_unlock_and_launch2 null
+adb shell settings put global voice_unlock_and_launch3 null
+```
 
 ###### Permanecer Ativo enquanto estiver carregando
-`adb shell settings put global stay_on_while_plugged_in 0`
-`adb shell settings put global stay_on_while_plugged_in 3`
+```bash
+adb shell settings put global stay_on_while_plugged_in 0
+adb shell settings put global stay_on_while_plugged_in 3
+```
 
 ###### Modo avião  (0 off | 1 on)
-`adb shell settings put global airplane_mode_on 1`
-`adb shell settings put global airplane_mode_on 0`
+```bash
+adb shell settings put global airplane_mode_on 1
+adb shell settings put global airplane_mode_on 0
+```
 
 -----------------------------------------------
 ###### Parar Processos
