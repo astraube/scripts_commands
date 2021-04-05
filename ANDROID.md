@@ -1,11 +1,17 @@
-
-SEE: https://developer.android.com/studio/command-line
-SEE: http://adbshell.com/commands/adb-shell-netstat
-SEE: https://gist.github.com/otikev/95d0e163704367048b1d0efcefcc7151
-SEE: https://www.androidjungles.com/adb-fastboot-commands/
-
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
+
+#### Links
+
+https://developer.android.com/studio/command-line
+
+http://adbshell.com/commands/adb-shell-netstat
+
+https://gist.github.com/otikev/95d0e163704367048b1d0efcefcc7151
+
+https://www.androidjungles.com/adb-fastboot-commands
+
+
 
 * Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
 * Fique a vontade para melhorias
