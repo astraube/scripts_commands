@@ -1,3 +1,4 @@
+
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
 
@@ -148,12 +149,13 @@ adb shell settings put global airplane_mode_on 0
 ```
 
 -----------------------------------------------
-###### Parar Processos
+###### Listar processos
 ```bash
-pc $ adb -d shell
-android $ su
-android # ps
-android # kill <process id from ps output>
+adb -d ps
+```
+###### Parar processos
+```bash
+adb -d kill <PID>
 ```
 
 ###### Parar APP
@@ -173,17 +175,20 @@ adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 -----------------------------------------------
 
 ###### Show process activity in real time
-`adb shell top
+```bash
+adb shell top
 ```
 ###### Show process activity in real time (Show threads)
-`adb shell top -H
+```bash
+adb shell top -H
 ```
 ###### Show process activity in real time (Show threads by PID)
-`adb shell top -H -p 6677
+```bash
+adb shell top -H -p 6677
 ```
-
 ###### listar processos
-`adb shell ps -A
+```bash
+adb shell ps -A
 ```
 
 ###### ler link
@@ -233,12 +238,10 @@ adb shell pm list packages -f [package app]
 ```bash
 adb shell input keyevent 82
 ```
-
 ###### botão de liga/desliga tela
 ```bash
 adb shell input keyevent 26
 ```
-
 ###### Botão de voltar
 ```bash
 adb shell input keyevent 26
@@ -252,21 +255,22 @@ adb pull /data/data/[package app]/databases/[dbname.db]
 ```
 -----------------------------------------------
 
-#### Resolução do dispositivo
-http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android
-
-`adb shell dumpsys display | grep mBaseDisplayInfo`
+#### Resolução do dispositivo - [Screen Resolution](http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android)
+```bash
+adb shell dumpsys display | grep mBaseDisplayInfo
+```
 
 ###### Encontre o valor da densidade
-
-`adb shell wm density <NEW DENSITY> && adb reboot`
+```bash
+adb shell wm density <NEW DENSITY> && adb reboot
+```
 
 ###### Obter tamanho físico da tela
 `adb shell wm size`
 
 -----------------------------------------------
 
-#### Tirar um print da tela
+#### Print de tela
 ```bash
 adb shell screencap /sdcard/screen.png
 
