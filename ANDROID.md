@@ -1,15 +1,19 @@
+
+SEE: https://developer.android.com/studio/command-line
+SEE: http://adbshell.com/commands/adb-shell-netstat
+SEE: https://gist.github.com/otikev/95d0e163704367048b1d0efcefcc7151
+SEE: https://www.androidjungles.com/adb-fastboot-commands/
+
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
 
-
-* Estou fazendo uma compilação dos comandos ADB Android que mais utilizo no desenvolvimento mobile.
+* Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
 * Fique a vontade para melhorias
 * Próximo passo será organizar por categorias
 * Desconsiderar erros de portugues e desorganização :)
 
 
-
-##### fastboot update
+#### fastboot update
 ```bash
 adb reboot-bootloader
 adb reboot bootloader
@@ -26,7 +30,7 @@ fastboot oem unlock
 ```
 -----------------------------------------------
 
-##### recovery mode
+#### recovery mode
 ```bash
 adb reboot recovery
 adb sideload update.zip
@@ -46,26 +50,43 @@ mount -o remount,ro none /system
 
 -----------------------------------------------
 
-###### iniciar um APP diretamente em uma Activity especifica
-`adb shell am start -a android.intent.action.MAIN "[package app]/.LauncherActivity"`
+#### getprop
+```bash
+# Ver todas as propriedades disponíveis com este comando:
+adb shell getprop
 
-###### Configurações do sistema
-`adb shell am start -n com.android.settings/.Settings`
+# Para obter a versão do Android, você pode usar:
+adb shell getprop ro.build.version.release 
 
-`adb shell am start -a android.intent.action.MAIN -n com.android.settings/.Settings`
-`adb shell am start -a android.settings.SETTINGS`
+# Para obter o nível de API:
+adb shell getprop ro.build.version.sdk 
+```
+-----------------------------------------------
 
-###### GPS
-`adb shell am start -a android.settings.LOCATION_SOURCE_SETTINGS`
+#### am start
+```bash
+# iniciar um APP diretamente em uma Activity especifica
+adb shell am start -a android.intent.action.MAIN "[package app]/.LauncherActivity"
 
-###### wifi-settings
-`adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings`
+# Configurações do sistema
+adb shell am start -n com.android.settings/.Settings
 
-###### LAUNCHER
-`adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME`
+adb shell am start -a android.intent.action.MAIN -n com.android.settings/.Settings
 
-###### HOME
-`adb shell am start -c android.intent.category.HOME -a android.intent.action.MAIN`
+adb shell am start -a android.settings.SETTINGS
+
+# GPS
+adb shell am start -a android.settings.LOCATION_SOURCE_SETTINGS
+
+# wifi-settings
+adb shell am start -a android.intent.action.MAIN -n com.android.settings/.wifi.WifiSettings
+
+# LAUNCHER
+adb shell am start -a android.intent.action.MAIN -c android.intent.category.HOME
+
+# HOME
+adb shell am start -c android.intent.category.HOME -a android.intent.action.MAIN
+```
 -----------------------------------------------
 
 ##### Habilitar/Desabilitar wifi
@@ -130,6 +151,21 @@ android # kill <process id from ps output>
 `adb shell am broadcast -a android.intent.action.BOOT_COMPLETED`
 -----------------------------------------------
 
+###### Show process activity in real time
+`adb shell top`
+###### Show process activity in real time (Show threads)
+`adb shell top -H`
+###### Show process activity in real time (Show threads by PID)
+`adb shell top -H -p 6677`
+
+###### listar processos
+`adb shell ps -A`
+
+###### ler link
+`adb shell readlink /proc/self/exe`
+`adb shell readlink /proc/self/exe`
+`adb shell readlink /proc/self/cwd`
+
 ###### listar packages
 `adb shell pm list packages -f`
 
@@ -164,7 +200,7 @@ android # kill <process id from ps output>
 
 #### copy databases
 ```bash
-adb shell run-as [package app] chmod 666 /data/app/[package app]/databases/[dbname-db]
+adb shell run-as [package app] chmod 666 /data/app/[package app]/databases/[dbname.db]
 adb pull /data/data/[package app]/databases/[dbname.db]
 ```
 -----------------------------------------------
@@ -218,5 +254,3 @@ adb install -r -d -l com.google.android.gms-1-update-play-service-30.10.2018.apk
 
 ###### Verifique a versão do aplicativo (comandos grep funcionam apenas no linux)
 `adb shell dumpsys package <PACKAGE> | grep versionName`
-
-To be continued...
