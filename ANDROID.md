@@ -138,13 +138,19 @@ android # kill <process id from ps output>
 ```
 
 ###### Parar APP
-`adb shell stop [package app]`
+```bash
+adb shell stop [package app]
+```
 
 ###### Forçar parada do APP
-`adb shell am force-stop [package app]`
+```bash
+adb shell am force-stop [package app]
+```
 
 ###### broadcast-boot-completed
-`adb shell am broadcast -a android.intent.action.BOOT_COMPLETED`
+```bash
+adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+```
 -----------------------------------------------
 
 ###### Show process activity in real time
