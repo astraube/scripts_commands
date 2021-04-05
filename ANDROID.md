@@ -173,50 +173,76 @@ adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 -----------------------------------------------
 
 ###### Show process activity in real time
-`adb shell top`
+`adb shell top
+```
 ###### Show process activity in real time (Show threads)
-`adb shell top -H`
+`adb shell top -H
+```
 ###### Show process activity in real time (Show threads by PID)
-`adb shell top -H -p 6677`
+`adb shell top -H -p 6677
+```
 
 ###### listar processos
-`adb shell ps -A`
+`adb shell ps -A
+```
 
 ###### ler link
-`adb shell readlink /proc/self/exe`
-`adb shell readlink /proc/self/exe`
-`adb shell readlink /proc/self/cwd`
+```bash
+adb shell readlink /proc/self/exe
+
+adb shell readlink /proc/self/exe
+
+adb shell readlink /proc/self/cwd
+```
 
 ###### listar packages
-`adb shell pm list packages -f`
+```bash
+adb shell pm list packages -f
+```
 
 ###### apagar arquivos de cache para alcançar o espaço livre fornecido
-`adb shell pm trim-caches`
+```bash
+adb shell pm trim-caches
+```
 
 ###### Limpar preferências compartilhadas do APP
-`adb shell pm clear [package app]`
+```bash
+adb shell pm clear [package app]
+```
 
 ###### mantenha os diretórios de dados e cache disponíveis após a remoção do pacote.
-`adb shell pm uninstall -k [package app]`
+```bash
+adb shell pm uninstall -k [package app]
+```
 
 ###### desistalar um APP por package
-`adb shell pm uninstall [package app]`
+```bash
+adb shell pm uninstall [package app]
+```
 
 ###### recuperar PATH absoluto de um package
-`adb shell pm list packages -f [package app]`
+```bash
+adb shell pm list packages -f [package app]
+```
 
 -----------------------------------------------
 
 #### Simulação de Botão Pressionado
 
 ###### press-menu-button
-`adb shell input keyevent 82`
+```bash
+adb shell input keyevent 82
+```
 
 ###### botão de liga/desliga tela
-`adb shell input keyevent 26`
+```bash
+adb shell input keyevent 26
+```
 
 ###### Botão de voltar
-`adb shell input keyevent 26`
+```bash
+adb shell input keyevent 26
+```
 -----------------------------------------------
 
 #### copy databases
