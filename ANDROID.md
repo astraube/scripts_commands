@@ -1,14 +1,14 @@
 
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
-
-
+> 
 
 * Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
 * Fique a vontade para melhorias
 * Próximo passo será organizar por categorias
 * Desconsiderar erros de portugues e desorganização :)
 
+[netstat](https://adbshell.com/commands/adb-shell-netstat)
 
 #### fastboot update
 ```bash
@@ -172,12 +172,15 @@ adb shell am force-stop [package app]
 ```bash
 adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
 ```
------------------------------------------------
+
+## adb shell top
 
 ###### Show process activity in real time
 ```bash
 adb shell top
 ```
+> *Cursor LEFT/RIGHT to change sort, UP/DOWN move list, space to force update, R to reverse sort, Q to exit*
+
 ###### Show process activity in real time (Show threads)
 ```bash
 adb shell top -H
@@ -186,19 +189,44 @@ adb shell top -H
 ```bash
 adb shell top -H -p 6677
 ```
-###### listar processos
+###### Show FIELDS (def PID,USER,PR,NI,VIRT,RES,SHR,S,%CPU,%MEM,TIME+,CMDLINE)
+```bash
+adb shell top -H -o %CPU,%MEM,TIME+,CMDLINE
+```
+###### Maximum number of tasks to show
+```bash
+adb shell top -m 50
+```
+
+## adb shell ps
+
+###### List processes. Which processes to show (selections may be comma separated lists)
 ```bash
 adb shell ps -A
 ```
+###### All processes
+```bash
+adb shell ps -A
+```
+###### filter PIDs (--pid)
+```bash
+adb shell ps -p 1256
+```
+###### Show threads
+```bash
+adb shell ps -t
+```
+
+## adb shell readlink 
 
 ###### ler link
 ```bash
 adb shell readlink /proc/self/exe
 
-adb shell readlink /proc/self/exe
-
 adb shell readlink /proc/self/cwd
 ```
+
+## adb shell pm
 
 ###### listar packages
 ```bash
@@ -276,6 +304,12 @@ adb shell screencap /sdcard/screen.png
 
 # Copiar print para o computador
 adb pull /sdcard/screen.png screen.png
+
+# Salvar captura de tela com o comando 'exec-out' no diretorio de usuario local
+adb exec-out screencap -p > screenshot.png
+
+# Salvar captura de tela com o comando 'exec-out' em um diretorio especifico
+adb exec-out screencap -p > D:\screenshot.png
 ```
 -----------------------------------------------
 
@@ -283,13 +317,36 @@ adb pull /sdcard/screen.png screen.png
 ```bash
 adb shell screenrecord /sdcard/demo.mp4 <press Ctrl-C to stop recording>
 adb pull /sdcard/demo.mp4
+adb pull rm /sdcard/demo.mp4
 adb shell screenrecord --bit-rate 7000000 /sdcard/demo.mp4 <7Mbps>
-adb shell screenrecord --size <WIDTHxHEIGHT>
+adb shell screenrecord --size 1920x1080
 adb shell screenrecord --time-limit <TIME max 180 seconds>
 
 # copiar o vídeo para o computador
 adb pull /sdcard/demo.mp4
+
+# Salvar captura de tela com o comando 'exec-out' no diretorio de usuario local
+adb exec-out screenrecord /sdcard/demo.mp4 -p > screenshot.png
 ```
+-----------------------------------------------
+
+#### Streaming de tela
+* ffplay
+```bash
+adb exec-out screenrecord --output-format=h264 --size 540x960 - | ffplay -framerate 60 -framedrop -bufsize 16M -
+
+adb exec-out screenrecord --output-format=h264 --size 540x960 --bit-rate=16m - | ffplay -framerate 60 -framedrop -bufsize 16M -
+
+adb exec-out screenrecord --output-format=h264 --size 540x960 - | ffplay -hide_banner -framerate 60 -probesize 32 -sync video  -
+```
+
+* mplayer
+```bash
+adb exec-out screenrecord --output-format=h264 - | mplayer -framedrop -fps 6000 -cache 512 -demuxer h264es -
+adb exec-out screenrecord --output-format=h264 --size 540x960 - | mplayer -framedrop -fps 6000 -cache 512 -demuxer h264es -
+```
+
+
 -----------------------------------------------
 
 #### Atualizar google play service manualmente
