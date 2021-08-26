@@ -1,7 +1,9 @@
 
+
 > ## Comandos úteis para Android
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
-> 
+
+
 
 * Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
 * Fique a vontade para melhorias
