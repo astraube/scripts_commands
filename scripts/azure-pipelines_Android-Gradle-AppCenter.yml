@@ -1,0 +1,64 @@
+#####
+# Created on 12/06/2019
+# @author Andre Straube
+#####
+
+variables:
+- name: BuildParameters.wrapperScript
+  value: gradlew
+- name: BuildParameters.tasks
+  value: assembleDebug
+name: $(date:yyyyMMdd)$(rev:.r)
+resources:
+  repositories:
+  - repository: self
+    type: git
+    ref: refs/heads/master
+jobs:
+- job: Job_1
+  displayName: Job 1
+  pool:
+    vmImage: windows-2019
+  steps:
+  - checkout: self
+  - task: Gradle@2
+    displayName: gradlew assembleDebug
+    inputs:
+      wrapperScript: $(BuildParameters.wrapperScript)
+      tasks: $(BuildParameters.tasks)
+      publishJUnitResults: false
+      jdkVersion: 1.8
+  - task: AndroidSigning@3
+    displayName: Signing APK file(s) **/*.apk
+    enabled: False
+    inputs:
+      apksign: false
+      zipalign: false
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    condition: succeededOrFailed()
+    enabled: False
+    inputs:
+      SourceFolder: $(system.defaultworkingdirectory)
+      Contents: '**/*.apk'
+      TargetFolder: $(build.artifactstagingdirectory)
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact: drop'
+    condition: succeededOrFailed()
+    enabled: False
+    inputs:
+      PathtoPublish: $(build.artifactstagingdirectory)
+  - task: AppCenterTest@1
+    displayName: Test with App Center
+    condition: succeededOrFailed()
+    enabled: False
+    inputs:
+      app: '**/*.apk'
+  - task: AppCenterDistribute@2
+    displayName: Deploy **/*.apk to App Center
+    condition: succeededOrFailed()
+    enabled: False
+    inputs:
+      app: '**/*.apk'
+      packParentFolder: false
+...

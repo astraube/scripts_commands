@@ -1,0 +1,65 @@
+#####
+# Created on 20/09/2018
+# @author Andre Straube
+#####
+
+name: $(date:yyyyMMdd)$(rev:.r)
+
+variables:
+  buildConfigurations: 'Homolog'
+  buildVariant: 'assembleIdoohHmlDebug'
+  group: 'keystore-variables'
+
+trigger:  
+  - master
+
+pool:
+  vmImage: 'windows-latest'
+  demands: java
+
+steps:
+  - checkout: self
+  # Build app with wrapper Gradle
+  - task: Gradle@2
+    displayName: 'Build by variant: IdoohHmlDebug'
+    inputs:
+      workingDirectory: ''
+      gradleWrapperFile: 'gradlew'
+      gradleOptions: '-Xmx3072m'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: '1.8'
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
+      testResultsFiles: '**/TEST-*.xml'
+      tasks: $(buildVariant)
+
+  # Signing APK.
+  - task: AndroidSigning@3
+    displayName: 'Signing and aligning APK file(s) **/*.apk'
+    inputs:
+      apkFiles: '**/*.apk'
+      apksignerKeystoreFile: 'keystore/idooh_keystore.jks'
+      apksignerKeystorePassword: $(signerKeystorePassword)
+      apksignerKeystoreAlias: $(signerKeystoreAlias)
+      apksignerKeyPassword: $(signerKeyPassword)
+      zipalign: false
+    enabled: false
+
+  - task: CopyFiles@2
+    displayName: 'Copy Files to: $(build.artifactstagingdirectory)'
+    inputs:
+      SourceFolder: '$(system.defaultworkingdirectory)'
+      Contents: '**/*.apk'
+      TargetFolder: '$(build.artifactstagingdirectory)'
+      OverWrite: true
+    enabled: true
+    condition: succeededOrFailed()
+    #condition: succeeded()
+
+  - task: PublishBuildArtifacts@1
+    displayName: 'Publish Artifact to: drop'
+    inputs:
+      PathtoPublish: '$(build.artifactstagingdirectory)'
+      #ArtifactName: 'idooh.android'
+    condition: succeeded()
+    enabled: true
