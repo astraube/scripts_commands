@@ -362,6 +362,19 @@ adb install -r -d -l com.google.android.gms-1-update-play-service-30.10.2018.apk
 ```
 -----------------------------------------------
 
+#### Modo de depuração do Firebase Analytics - [Abrir Doc](https://firebase.google.com/docs/analytics/debugview?hl=pt-br)
+```bash
+# Para ativar o modo de depuração do Firebase Analytics (RELEASE)
+adb shell setprop debug.firebase.analytics.app [package]
+
+# Para ativar o modo de depuração do Firebase Analytics (DEBUG)
+adb shell setprop debug.firebase.analytics.app [package].debug
+
+# Para desativar o modo de depuração
+adb shell setprop debug.firebase.analytics.app .none.
+```
+-----------------------------------------------
+
 ###### Verifique a versão do aplicativo (comandos grep funcionam apenas no linux)
 `adb shell dumpsys package <PACKAGE> | grep versionName`
 
