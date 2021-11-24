@@ -10,7 +10,50 @@
 * Próximo passo será organizar por categorias
 * Desconsiderar erros de portugues e desorganização :)
 
+[Variáveis de Ambiente](https://developer.android.com/studio/command-line/variables)
+[Registros de rastreamento](https://developer.android.com/studio/profile/generate-trace-logs)
 [netstat](https://adbshell.com/commands/adb-shell-netstat)
+
+> Netstat - Display networking information
+
+```bash
+# Default is netstat -tuwx
+adb shell netstat
+
+# Routing table
+adb shell netstat -r
+
+# All sockets (not just connected)
+adb shell netstat -a
+
+# Listening server sockets
+adb shell netstat -l
+
+# TCP sockets
+adb shell netstat -t
+
+# UDP sockets
+adb shell netstat -u
+
+# Raw sockets
+adb shell netstat -w
+
+# Unix sockets
+adb shell netstat -x
+
+# Extended info
+adb shell netstat -e
+
+# Don't resolve names
+adb shell netstat -n
+
+# Wide display
+adb shell netstat -w
+
+# Show PID/program name of sockets
+adb shell netstat -p
+```
+
 
 #### fastboot update
 ```bash
@@ -285,7 +328,25 @@ adb pull /data/data/[package app]/databases/[dbname.db]
 ```
 -----------------------------------------------
 
-#### Resolução do dispositivo - [Screen Resolution](http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android)
+> [Dumpsys](https://developer.android.com/studio/command-line/dumpsys)
+
+> [WakeLocks](https://developer.android.com/training/scheduling/wakelock)
+```bash
+Para ver qual WakeLocks está pendente
+adb shell dumpsys power
+adb shell dumpsys power | grep -i wake
+adb shell dumpsys power | grep WAKE_LOCK
+```
+
+> Package infos
+`adb shell dumpsys package <PACKAGE> | grep <option>`
+```bash
+`adb shell dumpsys package com.android.settings | grep versionName`
+`adb shell dumpsys package com.android.settings | grep versionCode`
+`adb shell dumpsys package com.android.settings | grep userId`
+```
+
+> [Screen Resolution](http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android)
 ```bash
 adb shell dumpsys display | grep mBaseDisplayInfo
 ```
@@ -374,9 +435,6 @@ adb shell setprop debug.firebase.analytics.app [package].debug
 adb shell setprop debug.firebase.analytics.app .none.
 ```
 -----------------------------------------------
-
-###### Verifique a versão do aplicativo (comandos grep funcionam apenas no linux)
-`adb shell dumpsys package <PACKAGE> | grep versionName`
 
 
 
