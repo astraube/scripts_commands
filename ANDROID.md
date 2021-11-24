@@ -4,15 +4,15 @@
 > Compilado por [Andrè Straube](www.andrestraube.com.br)
 
 
-
 * Estou fazendo uma compilação dos comandos ADB Android que julgo mais úteis.
 * Fique a vontade para melhorias
 * Próximo passo será organizar por categorias
 * Desconsiderar erros de portugues e desorganização :)
 
+
 [Variáveis de Ambiente](https://developer.android.com/studio/command-line/variables)
+
 [Registros de rastreamento](https://developer.android.com/studio/profile/generate-trace-logs)
-[netstat](https://adbshell.com/commands/adb-shell-netstat)
 
 > Netstat - Display networking information
 
