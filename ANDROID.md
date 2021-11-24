@@ -333,9 +333,9 @@ adb pull /data/data/[package app]/databases/[dbname.db]
 ### Package infos
 `adb shell dumpsys package <PACKAGE> | grep <option>`
 ```bash
-`adb shell dumpsys package com.android.settings | grep versionName`
-`adb shell dumpsys package com.android.settings | grep versionCode`
-`adb shell dumpsys package com.android.settings | grep userId`
+adb shell dumpsys package com.android.settings | grep versionName
+adb shell dumpsys package com.android.settings | grep versionCode
+adb shell dumpsys package com.android.settings | grep userId
 ```
 
 ### [WakeLocks](https://developer.android.com/training/scheduling/wakelock)
