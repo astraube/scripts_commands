@@ -328,17 +328,9 @@ adb pull /data/data/[package app]/databases/[dbname.db]
 ```
 -----------------------------------------------
 
-> # [Dumpsys](https://developer.android.com/studio/command-line/dumpsys)
+> ## [Dumpsys](https://developer.android.com/studio/command-line/dumpsys)
 
-
-> ## [WakeLocks](https://developer.android.com/training/scheduling/wakelock)
-```bash
-Para ver qual WakeLocks está pendente
-adb shell dumpsys power
-adb shell dumpsys power | grep -i wake
-adb shell dumpsys power | grep WAKE_LOCK
-```
-> Package infos
+### Package infos
 `adb shell dumpsys package <PACKAGE> | grep <option>`
 ```bash
 `adb shell dumpsys package com.android.settings | grep versionName`
@@ -346,7 +338,15 @@ adb shell dumpsys power | grep WAKE_LOCK
 `adb shell dumpsys package com.android.settings | grep userId`
 ```
 
-> [Screen Resolution](http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android)
+### [WakeLocks](https://developer.android.com/training/scheduling/wakelock)
+```bash
+Para ver qual WakeLocks está pendente
+adb shell dumpsys power
+adb shell dumpsys power | grep -i wake
+adb shell dumpsys power | grep WAKE_LOCK
+```
+
+### [Screen Resolution](http://www.wikihow.com/Change-the-Screen-Resolution-on-Your-Android)
 ```bash
 adb shell dumpsys display | grep mBaseDisplayInfo
 ```
