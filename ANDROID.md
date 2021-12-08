@@ -14,6 +14,15 @@
 
 [Registros de rastreamento](https://developer.android.com/studio/profile/generate-trace-logs)
 
+
+```bash
+adb shell dumpsys activity -h
+adb shell dumpsys window -h
+adb shell dumpsys meminfo -h
+adb shell dumpsys package -h
+adb shell dumpsys batteryinfo -h
+```
+
 > Netstat - Display networking information
 
 ```bash
