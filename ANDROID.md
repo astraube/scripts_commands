@@ -16,6 +16,8 @@
 
 
 ```bash
+adb shell dumpsys alarm
+adb shell dumpsys alarm > AlarmsOutput.txt
 adb shell dumpsys activity -h
 adb shell dumpsys window -h
 adb shell dumpsys meminfo -h
